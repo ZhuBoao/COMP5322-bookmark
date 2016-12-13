@@ -1,20 +1,42 @@
-  <html>
-  <head>
-    <title>Deleting bookmarks</title>
-    <style>
-      body { font-family: Arial, Helvetica, sans-serif; font-size: 13px }
-      li, td { font-family: Arial, Helvetica, sans-serif; font-size: 13px }
-      hr { color: #3333cc; width=300; text-align=left}
-      a { color: #000000 }
-    </style>
-  </head>
-  <body>
-  <img src="bookmark.gif" alt="PHPbookmark logo" border="0"
-       align="left" valign="bottom" height="55" width="57" />
-  <h1>PHPbookmark</h1>
-  <hr />
-  <h2>Deleting bookmarks</h2>
-  <h2>Problem:</h2>
-You are not logged in.<br />  <br /><a href="login.php">Login</a><br />
-  </body>
-  </html>
+<?php
+require_once('bookmark_fns.php');
+session_start();
+
+//create short variable names
+$del_me=$_POST['del_me'];
+$valid_user=$_SESSION['valid_user'];
+
+do_html_header('Deleting bookmark');
+check_valid_user();
+
+if (!filled_out($_POST)) {
+	echo "<p>You have chosen no bookmarks to delete<br>Try later</p>";
+	display_user_menu();
+	do_html_footer();
+
+} else {
+	if (count($del_me)>0) {
+		foreach ($del_me as $del) {
+			if (delete_bm($valid_user,$del)) {
+				echo "delete ".htmlspecialchars($del)."<br/>";
+				// echo "delete ".$del."<br/>";
+			} else {
+				echo "Could not delete ".htmlspecialchars($del)."<br>";
+			}
+			
+		}
+		
+	} else {
+		echo "No bookmarks selected for deletion";
+	}
+}
+
+//get the bookmarks this user have saved
+if ($url_array=get_user_urls($valid_user)) {
+	display_user_urls($url_array);
+}
+display_user_menu();
+do_html_footer();
+
+
+?>

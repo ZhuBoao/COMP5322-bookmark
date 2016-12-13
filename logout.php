@@ -1,19 +1,28 @@
-  <html>
-  <head>
-    <title>Logging Out</title>
-    <style>
-      body { font-family: Arial, Helvetica, sans-serif; font-size: 13px }
-      li, td { font-family: Arial, Helvetica, sans-serif; font-size: 13px }
-      hr { color: #3333cc; width=300; text-align=left}
-      a { color: #000000 }
-    </style>
-  </head>
-  <body>
-  <img src="bookmark.gif" alt="PHPbookmark logo" border="0"
-       align="left" valign="bottom" height="55" width="57" />
-  <h1>PHPbookmark</h1>
-  <hr />
-  <h2>Logging Out</h2>
-You were not logged in, and so have not been logged out.<br />  <br /><a href="login.php">Login</a><br />
-  </body>
-  </html>
+<?php
+//include files for this application
+require_once('bookmark_fns.php');
+session_start();
+$old_user=$_SESSION['valid_user'];
+
+unset($_SESSION['valid_user']);
+$result_dest=session_destroy();
+
+do_html_header('Logging out');
+
+if (!empty($old_user)) {
+	if ($result_dest) {
+		echo "Log out<br>";
+		do_html_url('login.php','Login');
+	} else {
+		echo "Could not log you out<br>";
+	}
+	
+} else {
+	echo "You were not logged in bu come to this page somehow.<br>";
+	echo "You were not log in,so you don not have to log out<br>";
+	do_html_url('login.php','Login');
+	}
+
+do_html_footer();
+
+?>

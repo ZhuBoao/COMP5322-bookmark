@@ -1,20 +1,30 @@
-  <html>
-  <head>
-    <title>Changing password</title>
-    <style>
-      body { font-family: Arial, Helvetica, sans-serif; font-size: 13px }
-      li, td { font-family: Arial, Helvetica, sans-serif; font-size: 13px }
-      hr { color: #3333cc; width=300; text-align=left}
-      a { color: #000000 }
-    </style>
-  </head>
-  <body>
-  <img src="bookmark.gif" alt="PHPbookmark logo" border="0"
-       align="left" valign="bottom" height="55" width="57" />
-  <h1>PHPbookmark</h1>
-  <hr />
-  <h2>Changing password</h2>
-  <h2>Problem:</h2>
-You are not logged in.<br />  <br /><a href="login.php">Login</a><br />
-  </body>
-  </html>
+<?php
+require_once('bookmark_fns.php');
+session_start();
+do_html_header('Change Password');
+
+//create short variable names
+$old_passwd=$_POST['old_passwd'];
+$new_passwd=$_POST['new_passwd'];
+$new_passwd2=$_POST['new_passwd2'];
+
+try {
+	check_valid_user();
+	if (!filled_out($POST)) {
+		throw new Exception("You have not filled put the form completely.");
+	}
+	if ($new_passwd!=$new_passwd2) {
+		throw new Exception("Passwords are not same");
+	}
+	if ((strlen($new_passwd)>16)||(strlen($new_passwd)<6)) {
+		throw new Exception("New password should be between 6 and 16");
+	}
+	change_password($_SESSION['valid_user'],$old_passwd,$new_passwd);
+	echo "Password Changed<br>";
+} catch (Exception $e) {
+	echo $e->getMessage();
+}
+display_user_menu();
+do_html_footer();
+
+?>
