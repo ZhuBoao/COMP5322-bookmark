@@ -11,5 +11,3 @@ display_add_bm_form();
 
 display_user_menu();
 do_html_footer();
-
-?>

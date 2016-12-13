@@ -144,4 +144,3 @@ function notify_password($username,$password){
 		}
 	}
 }
-?>

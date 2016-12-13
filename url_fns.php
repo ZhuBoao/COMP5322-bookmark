@@ -82,4 +82,3 @@ function recommend_urls($valid_user,$popularity=1){
 	return $urls;
 }
 
-?>

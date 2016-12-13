@@ -5,7 +5,7 @@ $new_url=$_POST['new_url'];
 do_html_header('Adding bookmarks');
 try {
 	check_valid_user();
-	if (!filled_out($POST)) {
+	if (!filled_out($_POST)) {
 		throw new Exception("Form not completely filled out");	
 	} 
 

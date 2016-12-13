@@ -5,4 +5,3 @@
  display_forgot_form();
 
  do_html_footer();
-?>

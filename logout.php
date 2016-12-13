@@ -25,4 +25,3 @@ if (!empty($old_user)) {
 
 do_html_footer();
 
-?>

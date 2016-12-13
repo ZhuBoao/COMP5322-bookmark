@@ -26,5 +26,3 @@ try {
 }
 display_user_menu();
 do_html_footer();
-
-?>
