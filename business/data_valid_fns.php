@@ -15,6 +15,3 @@ function valid_email($address){
 		return false;
 	}
 }
-
-
-?>

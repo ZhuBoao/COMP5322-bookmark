@@ -1,25 +1,26 @@
 <?php
-
 function do_html_header($title){
 ?>
 <html>
 <head>
 	<title><?php echo $title;?></title>
-	<style type="text/css">
-		body{font-family: Arial,Helvetica,sans-serif;font-size: 13px}
-		li,td{font-family: Arial,Helvetica,sans-serif;font-size: 13px}
-		hr{color:#3333cc;width=300px;text-align: left}
-		a{color:#000000;}
-	</style>
+    <link rel="stylesheet" href="./public_html/stylesheet/index.css">
+    <!-- Bootstrap Core CSS -->
+    <link href="./resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="./resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 </head>
-<body>
-	<img src="bookmark.gif" alt="PHPMark Logo" border="0" align="left" valign="bottom" height="55"width="57" />
-	<h1>PHP bookmark</h1>
-	<hr />
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
 <?php
-if ($title) {
-	do_html_heading($title);
-}
 }
 function do_html_footer() {
   // print an HTML footer
@@ -29,6 +30,28 @@ function do_html_footer() {
 <?php
 }
 
+function do_html_view_header($title){
+?>
+<html>
+<head>
+	<title><?php echo $title;?></title>
+    <link rel="stylesheet" href="./public_html/stylesheet/main.css">
+    <!-- Bootstrap Core CSS -->
+    <link href="./resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="./resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+</head>
+<body>
+
+
+<?php
+}
 function do_html_heading($heading) {
   // print heading
 ?>
@@ -56,8 +79,8 @@ function display_site_info() {
 
 function display_login_form() {
 ?>
-	<p><a href="register_form.php">Not a member?</a></p>
-	<form method="post" action="member.php">
+	<p><a href="./register_form.php">Not a member?</a></p>
+	<form method="post" action="./member.php">
 	<table bgcolor="#cccccc">
 	<tr>
 	 <td colspan="2">Members log in here:</td>
@@ -71,7 +94,7 @@ function display_login_form() {
 	 <td colspan="2" align="center">
 	 <input type="submit" value="Log in"/></td></tr>
 	<tr>
-	 <td colspan="2"><a href="forgot_form.php">Forgot your password?</a></td>
+	 <td colspan="2"><a href="./forgot_form.php">Forgot your password?</a></td>
 	</tr>
 	</table></form>
 <?php
@@ -79,7 +102,7 @@ function display_login_form() {
 
 function display_registration_form() {
 ?>
- <form method="post" action="register_new.php">
+ <form method="post" action="./register_new.php">
  <table bgcolor="#cccccc">
    <tr>
      <td>Email address:</td>
@@ -103,6 +126,41 @@ function display_registration_form() {
 
 }
 
+function display_bookmark_list($url_array) {
+  global $bm_table;
+  $bm_table = true;
+?>
+<form name="bm_table" action="./delete_bms.php" method="post">
+  <table class="table">
+  <?php
+  $color = "#cccccc";
+  echo "<tr bgcolor=\"".$color."\"><td><strong>Bookmark</strong></td>";
+  echo "<td><strong>Delete?</strong></td></tr>";
+  if ((is_array($url_array)) && (count($url_array) > 0)) {
+    foreach ($url_array as $url)  {
+      if ($color == "#cccccc") {
+        $color = "#ffffff";
+      } else {
+        $color = "#cccccc";
+      }
+      //remember to call htmlspecialchars() when we are displaying user data
+      echo "<tr bgcolor=\"".$color."\"><td><a href=\"".$url."\">".htmlspecialchars($url)."</a></td>
+            <td><input type=\"checkbox\" name=\"del_me[]\"
+                value=\"".$url."\"/></td>
+            </tr>";
+    }
+  } else {
+    echo "<tr><td>No bookmarks on record</td></tr>";
+  }
+?>
+  </table>
+  </form>
+
+
+<?php
+}
+
+
 function display_user_urls($url_array) {
   // display the table of URLs
 
@@ -111,7 +169,7 @@ function display_user_urls($url_array) {
   $bm_table = true;
 ?>
   <br />
-  <form name="bm_table" action="delete_bms.php" method="post">
+  <form name="bm_table" action="./delete_bms.php" method="post">
   <table width="300" cellpadding="2" cellspacing="0">
   <?php
   $color = "#cccccc";
@@ -143,8 +201,8 @@ function display_user_menu() {
   // display the menu options on this page
 ?>
 <hr />
-<a href="member.php">Home</a> &nbsp;|&nbsp;
-<a href="add_bm_form.php">Add BM</a> &nbsp;|&nbsp;
+<a href="./member.php">Home</a> &nbsp;|&nbsp;
+<a href="#" class="modalBtn">Add BM</a> &nbsp;|&nbsp;
 <?php
   // only offer the delete option if bookmark table is on this page
   global $bm_table;
@@ -154,10 +212,10 @@ function display_user_menu() {
     echo "<span style=\"color: #cccccc\">Delete BM</span> &nbsp;|&nbsp;";
   }
 ?>
-<a href="change_passwd_form.php">Change password</a>
+<a href="./change_passwd_form.php">Change password</a>
 <br />
-<a href="recommend.php">Recommend URLs to me</a> &nbsp;|&nbsp;
-<a href="logout.php">Logout</a>
+<a href="./recommend.php">Recommend URLs to me</a> &nbsp;|&nbsp;
+<a href="./logout.php">Logout</a>
 <hr />
 
 <?php
@@ -166,7 +224,7 @@ function display_user_menu() {
 function display_add_bm_form() {
   // display the form for people to ener a new bookmark in
 ?>
-<form name="bm_table" action="add_bms.php" method="post">
+<form name="bm_table" action="./add_bms.php" method="post">
 <table width="250" cellpadding="2" cellspacing="0" bgcolor="#cccccc">
 <tr><td>New BM:</td>
 <td><input type="text" name="new_url" value="http://"
@@ -182,7 +240,7 @@ function display_password_form() {
   // display html change password form
 ?>
    <br />
-   <form action="change_passwd.php" method="post">
+   <form action="./change_passwd.php" method="post">
    <table width="250" cellpadding="2" cellspacing="0" bgcolor="#cccccc">
    <tr><td>Old password:</td>
        <td><input type="password" name="old_passwd"
@@ -208,7 +266,7 @@ function display_forgot_form() {
   // display HTML form to reset and email password
 ?>
    <br />
-   <form action="forgot_passwd.php" method="post">
+   <form action="./forgot_passwd.php" method="post">
    <table width="250" cellpadding="2" cellspacing="0" bgcolor="#cccccc">
    <tr><td>Enter your username</td>
        <td><input type="text" name="username" size="16" maxlength="16"/></td>

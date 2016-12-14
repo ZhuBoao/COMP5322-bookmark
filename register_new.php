@@ -1,6 +1,6 @@
 <?php
 
-require_once('bookmark_fns.php');
+require_once('./business/bookmark_fns.php');
 
 $email=$_POST['email'];
 $username=$_POST['username'];

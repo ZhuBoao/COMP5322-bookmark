@@ -1,6 +1,6 @@
 <?php
 //include files for this application
-require_once('bookmark_fns.php');
+require_once('./business/bookmark_fns.php');
 session_start();
 $old_user=$_SESSION['valid_user'];
 

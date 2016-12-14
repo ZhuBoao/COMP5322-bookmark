@@ -1,5 +1,5 @@
 <?php
-require_once('bookmark_fns.php');
+require_once('./business/bookmark_fns.php');
 session_start();
 
 //create short variable names
