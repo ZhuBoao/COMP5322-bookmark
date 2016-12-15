@@ -113,8 +113,7 @@ function display_registration_form() {
          size="16" maxlength="16"/></td></tr>
    <tr>
      <td>Password <br />(between 6 and 16 chars):</td>
-     <td valign="top"><input type="password" name="passwd"
-         size="16" maxlength="16"/></td></tr>
+     <td valign="top"><input type="password" name="passwd" size="16" maxlength="16"/></td></tr>
    <tr>
      <td>Confirm password:</td>
      <td><input type="password" name="passwd2" size="16" maxlength="16"/></td></tr>
@@ -144,7 +143,7 @@ function display_bookmark_list($url_array) {
         $color = "#cccccc";
       }
       //remember to call htmlspecialchars() when we are displaying user data
-      echo "<tr bgcolor=\"".$color."\"><td><a href=\"".$url."\">".htmlspecialchars($url)."</a></td>
+      echo "<tr bgcolor=\"".$color."\"><td><a target=\"_blank\" href=\"".$url."\">".htmlspecialchars($url)."</a></td>
             <td><input type=\"checkbox\" name=\"del_me[]\"
                 value=\"".$url."\"/></td>
             </tr>";
@@ -160,62 +159,20 @@ function display_bookmark_list($url_array) {
 <?php
 }
 
-
-function display_user_urls($url_array) {
-  // display the table of URLs
-
-  // set global variable, so we can test later if this is on the page
-  global $bm_table;
-  $bm_table = true;
-?>
-  <br />
-  <form name="bm_table" action="./delete_bms.php" method="post">
-  <table width="300" cellpadding="2" cellspacing="0">
-  <?php
-  $color = "#cccccc";
-  echo "<tr bgcolor=\"".$color."\"><td><strong>Bookmark</strong></td>";
-  echo "<td><strong>Delete?</strong></td></tr>";
-  if ((is_array($url_array)) && (count($url_array) > 0)) {
-    foreach ($url_array as $url)  {
-      if ($color == "#cccccc") {
-        $color = "#ffffff";
-      } else {
-        $color = "#cccccc";
-      }
-      //remember to call htmlspecialchars() when we are displaying user data
-      echo "<tr bgcolor=\"".$color."\"><td><a href=\"".$url."\">".htmlspecialchars($url)."</a></td>
-            <td><input type=\"checkbox\" name=\"del_me[]\"
-                value=\"".$url."\"/></td>
-            </tr>";
-    }
-  } else {
-    echo "<tr><td>No bookmarks on record</td></tr>";
-  }
-?>
-  </table>
-  </form>
-<?php
-}
 
 function display_user_menu() {
   // display the menu options on this page
 ?>
 <hr />
-<a href="./member.php">Home</a> &nbsp;|&nbsp;
-<a href="#" class="modalBtn">Add BM</a> &nbsp;|&nbsp;
+<a href="#" class="modalBtn btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add Bookmark</a> &nbsp;|&nbsp;
 <?php
   // only offer the delete option if bookmark table is on this page
   global $bm_table;
   if ($bm_table == true) {
-    echo "<a href=\"#\" onClick=\"bm_table.submit();\">Delete BM</a> &nbsp;|&nbsp;";
-  } else {
-    echo "<span style=\"color: #cccccc\">Delete BM</span> &nbsp;|&nbsp;";
+    echo "<a href=\"#\" class=\"btn btn-default\"  onClick=\"bm_table.submit();\"><span class=\"glyphicon glyphicon-remove\"></span> Delete BM</a> &nbsp;|&nbsp;";
   }
 ?>
-<a href="./change_passwd_form.php">Change password</a>
-<br />
-<a href="./recommend.php">Recommend URLs to me</a> &nbsp;|&nbsp;
-<a href="./logout.php">Logout</a>
+<a href="./member.php" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span> Recommend URLs</a>
 <hr />
 
 <?php
@@ -304,6 +261,54 @@ function display_recommended_urls($url_array) {
   }
 ?>
   </table>
+<?php
+}
+function display_page_nav(){
+?>
+        <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="member.php">
+                    <i class="fa fa-play-circle"></i> <span class="light">PHP</span> Bookmark
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="member.php">Home</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="change_passwd_form.php">Change Password</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+<?php
+}
+function do_jump_url($url,$timeout){
+?>
+<script type="text/javascript">
+     setTimeout(function(){
+         window.location.assign("<?php echo $url?>");
+     },<?php echo $timeout?>)
+</script>
+
+
 <?php
 }
 

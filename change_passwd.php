@@ -10,19 +10,26 @@ $new_passwd2=$_POST['new_passwd2'];
 
 try {
 	check_valid_user();
-	if (!filled_out($POST)) {
-		throw new Exception("You have not filled put the form completely.");
+	if (!filled_out($_POST)) {
+		do_jump_url("error.php?code=4002",1);
+        do_html_footer();
+		exit;
 	}
-	if ($new_passwd!=$new_passwd2) {
-		throw new Exception("Passwords are not same");
+	if (strcmp($new_passwd,$new_passwd2)) {
+        do_jump_url("error.php?code=4003",1);
+        do_html_footer();
+        exit;
 	}
 	if ((strlen($new_passwd)>16)||(strlen($new_passwd)<6)) {
-		throw new Exception("New password should be between 6 and 16");
+        do_jump_url("error.php?code=4004",1);
+        do_html_footer();
+        exit;
 	}
 	change_password($_SESSION['valid_user'],$old_passwd,$new_passwd);
-	echo "Password Changed<br>";
+	do_jump_url("information.php?code=2003",1);
 } catch (Exception $e) {
-	echo $e->getMessage();
+    do_jump_url("error.php?code=4002",1);
+    do_html_footer();
+    exit;
 }
-display_user_menu();
 do_html_footer();

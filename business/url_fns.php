@@ -1,7 +1,7 @@
 <?php
 
 function add_bm($new_url){
-	echo "Attempting to add ".htmlspecialchars($new_url)."<br />";
+//	echo "Attempting to add ".htmlspecialchars($new_url)."<br />";
 	$conn=db_connect();
 	// check not a repeat bookmark
   	$result = $conn->query("select * from bookmark

@@ -44,10 +44,10 @@ function check_valid_user(){
 
 	} else {
 		// they are logged in
-		do_html_heading('Problem:');
+//		do_html_heading('Problem:');
 //		echo "You are not logged in.<br>";
-		do_html_url('login.php','Login');
-		do_html_footer();
+//		do_html_url('login.php','Login');
+//		do_html_footer();
 		exit;
 	}
 	}

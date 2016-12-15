@@ -11,17 +11,13 @@ do_html_header('Logging out');
 
 if (!empty($old_user)) {
 	if ($result_dest) {
-		echo "Log out<br>";
-		do_html_url('login.php','Login');
+        do_jump_url("information.php?code=1001",1);
 	} else {
-		echo "Could not log you out<br>";
+        do_jump_url("error.php?code=3002",1);
 	}
 	
 } else {
-	echo "You were not logged in bu come to this page somehow.<br>";
-	echo "You were not log in,so you don not have to log out<br>";
-	do_html_url('login.php','Login');
+    do_jump_url("error.php?code=3002",1);
 	}
-
 do_html_footer();
 

@@ -21,3 +21,11 @@ $(function() {
         event.preventDefault();
     });
 });
+
+var registerBtnEvent = function(){
+    $("#registerBtn").click(function(){
+        $("#registerModal").modal();
+    })
+};
+
+registerBtnEvent();
