@@ -10,9 +10,9 @@ do_html_header('Deleting bookmark');
 check_valid_user();
 
 if (!filled_out($_POST)) {
-	echo "<p>You have chosen no bookmarks to delete<br>Try later</p>";
-	display_user_menu();
+	do_jump_url("error.php?code=4005",1);
 	do_html_footer();
+	exit;
 
 } else {
 	if (count($del_me)>0) {
@@ -35,6 +35,6 @@ if (!filled_out($_POST)) {
 if ($url_array=get_user_urls($valid_user)) {
 	display_user_urls($url_array);
 }
-display_user_menu();
+do_jump_url("information.php?code=2004",1);
 do_html_footer();
 

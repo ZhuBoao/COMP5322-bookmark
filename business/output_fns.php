@@ -153,15 +153,22 @@ function display_bookmark_list($url_array) {
   }
 ?>
   </table>
-  </form>
 
-
+<hr />
+<a href="#" class="modalBtn btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add Bookmark</a> &nbsp;|&nbsp;
+<?php
+  // only offer the delete option if bookmark table is on this page
+  global $bm_table;
+  if ($bm_table == true) {
+    echo "<button href=\"#\" class=\"btn btn-default\"  type='submit'><span class=\"glyphicon glyphicon-remove\"></span> Delete BM</button> &nbsp;|&nbsp;";
+  }
+?>
+<a href="./member.php" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span> Recommend URLs</a>
+<hr />
+</form>
 <?php
 }
-
-
-function display_user_menu() {
-  // display the menu options on this page
+function display_user_menu(){
 ?>
 <hr />
 <a href="#" class="modalBtn btn btn-default"><span class="glyphicon glyphicon-plus"></span> Add Bookmark</a> &nbsp;|&nbsp;
@@ -174,7 +181,6 @@ function display_user_menu() {
 ?>
 <a href="./member.php" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span> Recommend URLs</a>
 <hr />
-
 <?php
 }
 

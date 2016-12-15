@@ -36,7 +36,9 @@ display_page_nav();
                     if ($url_array=get_user_urls($_SESSION['valid_user'])) {
                         display_bookmark_list($url_array);
                     }
-                    display_user_menu();
+                    else{
+                        display_user_menu();
+                    }
                     ?>
                 </div>
             </div>
