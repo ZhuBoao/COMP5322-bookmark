@@ -124,14 +124,14 @@ function get_random_word($min_length,$maxlength){
 function notify_password($username,$password){
 	//notify the user that thir password has been changed
 	$conn=db_connect();
-	$result=$conn->query("select email from username where username='".$username."'");
+	$result=$conn->query("select email from user where username='".$username."'");
 	if (!$result) {
 		throw new Exception("Could not find email address");
 	}
 	else if ($result->num_rows==0) {
 		throw new Exception("Could not find email address");
 	}else{
-		$row=$conn->fetch_object();
+		$row=$result->fetch_object();
 		$email=$row->email;
 		$from="from:suppoert@phpbookmark\r\n";
 		$mesg="Your PHPBookmark password has been changed to".$password."\r\n".

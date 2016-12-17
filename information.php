@@ -2,6 +2,7 @@
 require_once('./business/bookmark_fns.php');
 $informationCode=$_GET['code'];
 $message = array("1001"=>"Logout Success!",
+    "1002" => "Your new password has been emailed to you.",
     "2002" => "Welcome! Register Success!",
     "2003" => "Change Password Success!",
     "2004" => "Delete Success!"

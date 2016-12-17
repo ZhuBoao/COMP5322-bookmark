@@ -26,6 +26,9 @@ var registerBtnEvent = function(){
     $("#registerBtn").click(function(){
         $("#registerModal").modal();
     })
+    $("#forgetBtn").click(function(){
+        $("#forgetModal").modal();
+    })
 };
 
 registerBtnEvent();

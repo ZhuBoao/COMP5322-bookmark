@@ -80,9 +80,10 @@ do_html_header('PHP Bookmark');
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-offset-2 col-lg-8">
+                        <div class="col-lg-offset-1 col-lg-8">
                             <button type="submit" class="btn btn-default">Login</button>
                             <button type="reset" class="btn btn-default">Reset</button>
+                            <a id="forgetBtn" class="btn btn-default">I Forget</a>
                         </div>
                     </div>
                 </form>
@@ -158,6 +159,26 @@ do_html_header('PHP Bookmark');
                             <input type="password" class="form-control" name="passwd2" size="16" maxlength="16" placeholder="Enter Password">
                         </div>
                         <button type="submit" class="btn btn-default btn-block"><span class="glyphicon glyphicon-ok"></span>Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="forgetModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding:35px 50px;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2>Forget Password</h2>
+                </div>
+                <div class="modal-body" style="padding:40px 50px;">
+                    <form action="forgot_passwd.php" method="post">
+                        <div class="form-group">
+                            <label for="username"><span class="glyphicon glyphicon-user"></span> Enter Your Username :</label>
+                            <input type="text" class="form-control" name="username" size="16" maxlength="16" placeholder="Enter Username">
+                        </div>
+                        <button type="submit" class="btn btn-default btn-block"><span class="glyphicon glyphicon-ok"></span>Get Password</button>
                     </form>
                 </div>
             </div>

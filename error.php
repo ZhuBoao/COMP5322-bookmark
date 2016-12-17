@@ -12,6 +12,7 @@ $message = array("4001"=>"Invalid bookmark url, please check the input.",
     "3004" => "That is not a valid email address.",
     "3005" => "The passwords do not match",
     "3006" => "Password must between 6 and 12 characters",
+    "3007" => "Could not reset password."
 );
 do_html_view_header('PHP Bookmark');
 display_page_nav();
